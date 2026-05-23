@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yousef Mustafa · يوسف</title>
+  <meta name="description" content="Personal profile of Yousef Mustafa — student, dreamer, space enthusiast.">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta property="og:title" content="Yousef Mustafa · يوسف">
+  <meta property="og:description" content="Personal profile of Yousef Mustafa — student, dreamer, space enthusiast.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ======================================
+       RESET & BASE
+    ====================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #0a0a0f;
+      --purple: #7c3aed;
+      --violet: #a855f7;
+      --lavender: #c4b5fd;
+      --white: #f8fafc;
+      --grey: #1e1b2e;
+      --glass-bg: rgba(30, 27, 46, 0.45);
+      --glass-border: rgba(124, 58, 237, 0.2);
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--purple) var(--black);
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ======================================
+       NOISE / GRAIN OVERLAY
+    ====================================== */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 128px 128px;
+    }
+
+    /* ======================================
+       STARFIELD CANVAS
+    ====================================== */
+    #starfield {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ======================================
+       SCROLL REVEAL
+    ====================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    /* ======================================
+       NAVBAR
+    ====================================== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background var(--transition), border-color var(--transition), backdrop-filter var(--transition);
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(10, 10, 15, 0.72);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid rgba(124, 58, 237, 0.12);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      user-select: none;
+      transition: transform var(--transition), filter var(--transition);
+    }
+
+    .nav-logo:hover {
+      transform: scale(1.08);
+      filter: drop-shadow(0 0 12px rgba(124, 58, 237, 0.4));
+    }
+
+    .nav-logo svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: rgba(248, 250, 252, 0.6);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--purple);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 1001;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px; height: 1.5px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+
+    .hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 10, 15, 0.96);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+
+    .mobile-menu a {
+      font-family: 'Sora', sans-serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color var(--transition);
+    }
+
+    .mobile-menu a:hover { color: var(--violet); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+    }
+
+    /* ======================================
+       HERO SECTION
+    ====================================== */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 2rem;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* Wormhole ring */
+    .wormhole {
+      position: absolute;
+      width: clamp(300px, 50vw, 600px);
+      height: clamp(300px, 50vw, 600px);
+      border-radius: 50%;
+      border: 1px solid rgba(124, 58, 237, 0.15);
+      box-shadow:
+        0 0 80px rgba(124, 58, 237, 0.08),
+        0 0 160px rgba(168, 85, 247, 0.04),
+        inset 0 0 80px rgba(124, 58, 237, 0.05);
+      animation: wormhole-rotate 30s linear infinite, wormhole-pulse 8s ease-in-out infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .wormhole::before {
+      content: '';
+      position: absolute;
+      top: 12%; left: 12%; right: 12%; bottom: 12%;
+      border-radius: 50%;
+      border: 1px solid rgba(168, 85, 247, 0.1);
+      animation: wormhole-rotate 20s linear infinite reverse;
+    }
+
+    .wormhole::after {
+      content: '';
+      position: absolute;
+      top: 25%; left: 25%; right: 25%; bottom: 25%;
+      border-radius: 50%;
+      border: 1px solid rgba(196, 181, 253, 0.08);
+      box-shadow: 0 0 60px rgba(124, 58, 237, 0.06);
+      animation: wormhole-rotate 15s linear infinite;
+    }
+
+    @keyframes wormhole-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes wormhole-pulse {
+      0%, 100% { opacity: 0.5; transform: rotate(0deg) scale(1); }
+      50% { opacity: 0.8; transform: rotate(180deg) scale(1.05); }
+    }
+
+    /* Gravitational lensing */
+    .lens-ring {
+      position: absolute;
+      width: clamp(400px, 65vw, 800px);
+      height: clamp(400px, 65vw, 800px);
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center,
+        transparent 45%,
+        rgba(124, 58, 237, 0.02) 55%,
+        rgba(168, 85, 247, 0.03) 65%,
+        transparent 75%
+      );
+      animation: lens-drift 25s ease-in-out infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes lens-drift {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.08) rotate(10deg); }
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-name {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.8rem, 8vw, 6.5rem);
+      font-weight: 200;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 0.3em;
+    }
+
+    .hero-arabic {
+      font-family: 'Readex Pro', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      font-weight: 300;
+      background: linear-gradient(135deg, var(--purple), var(--violet), var(--lavender));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      direction: rtl;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.875rem, 1.8vw, 1.1rem);
+      font-weight: 300;
+      color: rgba(248, 250, 252, 0.45);
+      letter-spacing: 0.05em;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.4;
+      transition: opacity var(--transition);
+    }
+
+    .scroll-indicator:hover { opacity: 0.7; }
+
+    .scroll-indicator span {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--lavender);
+    }
+
+    .scroll-arrow {
+      width: 18px; height: 18px;
+      border-right: 1px solid var(--lavender);
+      border-bottom: 1px solid var(--lavender);
+      transform: rotate(45deg);
+      animation: scroll-bounce 2.5s ease-in-out infinite;
+    }
+
+    @keyframes scroll-bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.4; }
+      50% { transform: rotate(45deg) translateY(6px); opacity: 1; }
+    }
+
+    /* ======================================
+       SECTIONS SHARED
+    ====================================== */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: clamp(4rem, 10vh, 8rem) clamp(1.5rem, 5vw, 4rem);
+    }
+
+    .section-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 200;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 2.5rem;
+      line-height: 1.2;
+    }
+
+    /* ======================================
+       ABOUT SECTION
+    ====================================== */
+    #about { padding-top: clamp(6rem, 12vh, 10rem); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    /* Space visual */
+    .space-visual {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid;
+    }
+
+    .orbit-ring-1 {
+      top: 5%; left: 5%; right: 5%; bottom: 5%;
+      border-color: rgba(124, 58, 237, 0.2);
+      animation: wormhole-rotate 20s linear infinite;
+    }
+
+    .orbit-ring-2 {
+      top: 15%; left: 15%; right: 15%; bottom: 15%;
+      border-color: rgba(168, 85, 247, 0.15);
+      animation: wormhole-rotate 15s linear infinite reverse;
+    }
+
+    .orbit-ring-3 {
+      top: 27%; left: 27%; right: 27%; bottom: 27%;
+      border-color: rgba(196, 181, 253, 0.1);
+      animation: wormhole-rotate 12s linear infinite;
+    }
+
+    .orbit-core {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 24%; height: 24%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.3), transparent);
+      box-shadow: 0 0 60px rgba(124, 58, 237, 0.2), 0 0 120px rgba(124, 58, 237, 0.1);
+      animation: core-pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes core-pulse {
+      0%, 100% { box-shadow: 0 0 60px rgba(124, 58, 237, 0.2), 0 0 120px rgba(124, 58, 237, 0.1); }
+      50% { box-shadow: 0 0 80px rgba(124, 58, 237, 0.35), 0 0 160px rgba(124, 58, 237, 0.15); }
+    }
+
+    .orbit-dot {
+      position: absolute;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--lavender);
+      box-shadow: 0 0 8px var(--lavender);
+    }
+
+    .orbit-dot-1 { top: 5%; left: 50%; transform: translateX(-50%); }
+    .orbit-dot-2 { bottom: 15%; right: 15%; }
+    .orbit-dot-3 { left: 27%; bottom: 27%; }
+
+    /* About text */
+    .about-text p {
+      font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+      font-weight: 300;
+      color: rgba(248, 250, 252, 0.65);
+      margin-bottom: 1.4rem;
+      line-height: 1.85;
+    }
+
+    .about-text .arabic-quote {
+      font-family: 'Readex Pro', sans-serif;
+      font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+      direction: rtl;
+      text-align: right;
+      color: var(--lavender);
+      font-weight: 300;
+      margin-top: 0.5rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 2rem;
+    }
+
+    .tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.4rem 1rem;
+      background: rgba(124, 58, 237, 0.08);
+      border: 1px solid rgba(124, 58, 237, 0.18);
+      border-radius: 100px;
+      color: var(--lavender);
+      letter-spacing: 0.03em;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .tag:hover {
+      background: rgba(124, 58, 237, 0.18);
+      border-color: rgba(124, 58, 237, 0.35);
+    }
+
+    /* ======================================
+       INTERSTELLAR SECTION
+    ====================================== */
+    #interstellar {
+      padding-top: clamp(4rem, 8vh, 7rem);
+      padding-bottom: clamp(4rem, 8vh, 7rem);
+    }
+
+    .interstellar-hero {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .interstellar-hero .section-title {
+      margin-bottom: 1rem;
+    }
+
+    .interstellar-tagline {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+      font-weight: 300;
+      color: rgba(248, 250, 252, 0.4);
+      font-style: italic;
+      letter-spacing: 0.03em;
+    }
+
+    /* Black hole visual */
+    .blackhole-container {
+      position: relative;
+      width: clamp(200px, 30vw, 320px);
+      height: clamp(200px, 30vw, 320px);
+      margin: 0 auto 3rem;
+    }
+
+    .blackhole {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%; height: 100%;
+    }
+
+    .blackhole-core {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 28%; height: 28%;
+      border-radius: 50%;
+      background: radial-gradient(circle, #050508, #000);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.9), 0 0 80px rgba(0, 0, 0, 0.5);
+      z-index: 3;
+    }
+
+    .accretion-disk {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%; height: 90%;
+      border-radius: 50%;
+      border: 2px solid rgba(168, 85, 247, 0.15);
+      box-shadow:
+        0 0 30px rgba(124, 58, 237, 0.15),
+        0 0 60px rgba(168, 85, 247, 0.08),
+        inset 0 0 30px rgba(124, 58, 237, 0.08);
+      animation: accretion-spin 12s linear infinite;
+    }
+
+    .accretion-disk::before {
+      content: '';
+      position: absolute;
+      top: -5%; left: -5%; right: -5%; bottom: -5%;
+      border-radius: 50%;
+      border: 1px solid rgba(196, 181, 253, 0.06);
+      animation: accretion-spin 18s linear infinite reverse;
+    }
+
+    .accretion-disk-2 {
+      width: 70%; height: 70%;
+      border-color: rgba(124, 58, 237, 0.25);
+      box-shadow:
+        0 0 20px rgba(124, 58, 237, 0.2),
+        0 0 50px rgba(168, 85, 247, 0.1),
+        inset 0 0 20px rgba(124, 58, 237, 0.1);
+      animation: accretion-spin 8s linear infinite reverse;
+    }
+
+    .accretion-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 110%; height: 110%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center,
+        rgba(124, 58, 237, 0.08) 0%,
+        rgba(168, 85, 247, 0.04) 40%,
+        transparent 70%
+      );
+      animation: glow-pulse 5s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes accretion-spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* Quotes carousel */
+    .carousel-wrapper {
+      position: relative;
+      margin-top: 2rem;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
+      will-change: transform;
+    }
+
+    .carousel-track.no-transition {
+      transition: none;
+    }
+
+    .quote-card {
+      position: relative;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2.5rem 2rem 2rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: border-color var(--transition), box-shadow var(--transition), opacity 0.4s ease;
+      overflow: hidden;
+      width: 100%;
+      min-width: 100%;
+      box-sizing: border-box;
+      user-select: none;
+      opacity: 1;
+    }
+
+    .quote-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 0.3rem; left: 1.2rem;
+      font-family: 'Sora', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(124, 58, 237, 0.1);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* Carousel nav arrows */
+    .carousel-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .carousel-arrow {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(124, 58, 237, 0.1);
+      border: 1px solid rgba(124, 58, 237, 0.2);
+      color: var(--lavender);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), border-color var(--transition), transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(124, 58, 237, 0.2);
+      border-color: rgba(124, 58, 237, 0.4);
+      transform: scale(1.1);
+    }
+
+    .carousel-arrow:active {
+      transform: scale(0.95);
+    }
+
+    .carousel-arrow svg {
+      width: 16px; height: 16px;
+      fill: none;
+      stroke: var(--lavender);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Carousel dots */
+    .carousel-dots {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .carousel-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(124, 58, 237, 0.2);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.35s ease, transform 0.35s ease, width 0.35s ease;
+    }
+
+    .carousel-dot.active {
+      background: var(--violet);
+      width: 20px;
+      border-radius: 3px;
+    }
+
+    .carousel-dot:hover {
+      background: rgba(124, 58, 237, 0.45);
+    }
+
+    /* Quote counter */
+    .carousel-counter {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.7rem;
+      color: rgba(196, 181, 253, 0.35);
+      letter-spacing: 0.1em;
+    }
+
+    .quote-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.9rem, 1.4vw, 1.02rem);
+      font-weight: 300;
+      color: rgba(248, 250, 252, 0.75);
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quote-speaker {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--violet);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Full width featured quote */
+    .featured-quote {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 3rem 2rem;
+      position: relative;
+    }
+
+    .featured-quote::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--purple), transparent);
+    }
+
+    .featured-quote-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(248, 250, 252, 0.6);
+      line-height: 1.7;
+      max-width: 650px;
+      margin: 0 auto 1rem;
+    }
+
+    .featured-quote-arabic {
+      font-family: 'Readex Pro', sans-serif;
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      font-weight: 300;
+      color: rgba(196, 181, 253, 0.4);
+      direction: rtl;
+      margin-top: 1rem;
+    }
+
+    .featured-quote-speaker {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: rgba(168, 85, 247, 0.5);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+    }
+
+    /* ======================================
+       LINKS / SOCIAL SECTION
+    ====================================== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    }
+
+    .card {
+      position: relative;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2rem;
+      text-decoration: none;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 20px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+      transition: opacity var(--transition);
+      opacity: 0;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(124, 58, 237, 0.45);
+      box-shadow: 0 20px 60px rgba(124, 58, 237, 0.12), 0 0 40px rgba(124, 58, 237, 0.06);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+      width: 40px; height: 40px;
+      position: relative; z-index: 1;
+    }
+
+    .card-icon svg {
+      width: 100%; height: 100%;
+      fill: var(--white);
+      transition: fill var(--transition);
+    }
+
+    .card:hover .card-icon svg { fill: var(--violet); }
+
+    .card-name {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      position: relative; z-index: 1;
+    }
+
+    .card-handle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      color: rgba(248, 250, 252, 0.4);
+      position: relative; z-index: 1;
+    }
+
+    .card-action {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--violet);
+      letter-spacing: 0.05em;
+      font-weight: 500;
+      margin-top: auto;
+      position: relative; z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-action .arrow-icon {
+      transition: transform var(--transition);
+      display: inline-block;
+    }
+
+    .card:hover .card-action .arrow-icon { transform: translateX(4px); }
+
+    /* Copy button */
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(124, 58, 237, 0.12);
+      border: 1px solid rgba(124, 58, 237, 0.25);
+      color: var(--lavender);
+      font-size: 0.72rem;
+      font-family: 'DM Sans', sans-serif;
+      padding: 0.35rem 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition);
+      position: relative; z-index: 2;
+      letter-spacing: 0.02em;
+    }
+
+    .copy-btn:hover {
+      background: rgba(124, 58, 237, 0.25);
+      border-color: rgba(124, 58, 237, 0.45);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(30, 27, 46, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      color: var(--lavender);
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-family: 'DM Sans', sans-serif;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ======================================
+       MUSIC PLAYER
+    ====================================== */
+    .music-player {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 9998;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .music-btn {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(30, 27, 46, 0.8);
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .music-btn:hover {
+      background: rgba(124, 58, 237, 0.2);
+      border-color: rgba(124, 58, 237, 0.5);
+      box-shadow: 0 0 30px rgba(124, 58, 237, 0.15);
+      transform: scale(1.05);
+    }
+
+    .music-btn.playing {
+      border-color: rgba(124, 58, 237, 0.5);
+      box-shadow: 0 0 25px rgba(124, 58, 237, 0.2);
+    }
+
+    .music-btn svg {
+      width: 20px; height: 20px;
+      fill: var(--lavender);
+      transition: fill var(--transition);
+      position: relative;
+      z-index: 1;
+    }
+
+    .music-btn:hover svg { fill: var(--white); }
+
+    /* Sound wave animation when playing */
+    .music-btn .sound-waves {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .music-btn.playing .sound-waves::before,
+    .music-btn.playing .sound-waves::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      animation: sound-ripple 2s ease-out infinite;
+    }
+
+    .music-btn.playing .sound-waves::after {
+      animation-delay: 1s;
+    }
+
+    @keyframes sound-ripple {
+      0% { width: 100%; height: 100%; opacity: 0.5; }
+      100% { width: 180%; height: 180%; opacity: 0; }
+    }
+
+    .music-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      color: rgba(196, 181, 253, 0.5);
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      position: absolute;
+      right: calc(100% + 12px);
+      opacity: 0;
+      transform: translateX(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .music-player:hover .music-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Hidden iframe */
+    .yt-iframe {
+      position: fixed;
+      top: -9999px; left: -9999px;
+      width: 1px; height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ======================================
+       FOOTER
+    ====================================== */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 3rem 2rem 2.5rem;
+      max-width: 600px;
+      margin: 4rem auto 0;
+    }
+
+    .footer-line {
+      width: 120px; height: 2px;
+      margin: 0 auto 2rem;
+      background: linear-gradient(90deg, transparent, var(--purple), var(--violet), transparent);
+      border-radius: 2px;
+    }
+
+    footer p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(248, 250, 252, 0.3);
+      margin-bottom: 0.6rem;
+      font-weight: 300;
+    }
+
+    footer .footer-arabic {
+      font-family: 'Readex Pro', sans-serif;
+      direction: rtl;
+      color: rgba(196, 181, 253, 0.3);
+      margin-bottom: 1.2rem;
+    }
+
+    footer .footer-quote {
+      font-family: 'DM Sans', sans-serif;
+      font-style: italic;
+      color: rgba(196, 181, 253, 0.2);
+      font-size: 0.8rem;
+      letter-spacing: 0.03em;
+    }
+
+    /* ======================================
+       FOCUS STYLES
+    ====================================== */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--purple);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    /* ======================================
+       SKILLS SECTION
+    ====================================== */
+    #skills {
+      padding-top: clamp(4rem, 8vh, 6rem);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    /* Progress bars */
+    .skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .skill-item {
+      position: relative;
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .skill-name {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .skill-name .lang-icon {
+      width: 18px;
+      height: 18px;
+      opacity: 0.8;
+    }
+
+    .skill-pct {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--lavender);
+      opacity: 0.6;
+    }
+
+    .skill-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(124, 58, 237, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skill-fill {
+      height: 100%;
+      border-radius: 3px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+    }
+
+    .skill-fill::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 30px; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2));
+      border-radius: 3px;
+    }
+
+    .skill-fill.js {
+      background: linear-gradient(90deg, #7c3aed, #eab308);
+    }
+    .skill-fill.py {
+      background: linear-gradient(90deg, #7c3aed, #3b82f6);
+    }
+    .skill-fill.cs {
+      background: linear-gradient(90deg, #7c3aed, #a855f7);
+    }
+
+    .skill-fill.animated {
+      width: var(--target-width);
+    }
+
+    .skill-note {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(196, 181, 253, 0.4);
+      margin-top: 0.35rem;
+      font-style: italic;
+    }
+
+    /* Aspiration card */
+    .aspiration-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .aspiration-card:hover {
+      border-color: rgba(124, 58, 237, 0.35);
+      box-shadow: 0 16px 48px rgba(124, 58, 237, 0.08);
+    }
+
+    .aspiration-icon {
+      width: 48px; height: 48px;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(168, 85, 247, 0.08));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .aspiration-icon svg {
+      width: 24px; height: 24px;
+      stroke: var(--violet);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .aspiration-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+
+    .aspiration-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(248, 250, 252, 0.55);
+      line-height: 1.8;
+      margin-bottom: 0.8rem;
+    }
+
+    .aspiration-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .aspiration-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      padding: 0.3rem 0.7rem;
+      background: rgba(124, 58, 237, 0.08);
+      border: 1px solid rgba(124, 58, 237, 0.15);
+      border-radius: 100px;
+      color: rgba(196, 181, 253, 0.6);
+      letter-spacing: 0.02em;
+    }
+
+    /* ======================================
+       RESPONSIVE
+    ====================================== */
+    @media (max-width: 480px) {
+      .hero-name { font-size: 2.4rem; }
+      .hero-arabic { font-size: 1.5rem; }
+      .hero-subtitle { font-size: 0.82rem; }
+      .section-title { font-size: 1.7rem; }
+      .music-btn { width: 46px; height: 46px; }
+      .music-btn svg { width: 18px; height: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Starfield Canvas -->
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <!-- Navbar -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <a href="#hero" class="nav-logo" aria-label="Yousef Mustafa home">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#c4b5fd"/>
+          </linearGradient>
+        </defs>
+        <!-- Outer square -->
+        <rect x="15" y="15" width="70" height="70" rx="4" fill="none" stroke="url(#logo-grad)" stroke-width="2" opacity="0.4"/>
+        <!-- Inner rotated square (tesseract effect) -->
+        <rect x="28" y="28" width="44" height="44" rx="3" fill="none" stroke="url(#logo-grad)" stroke-width="2" transform="rotate(45, 50, 50)"/>
+        <!-- Connecting lines (dimension bridges) -->
+        <line x1="15" y1="15" x2="19" y2="19" stroke="#a855f7" stroke-width="1" opacity="0.5"/>
+        <line x1="85" y1="15" x2="81" y2="19" stroke="#a855f7" stroke-width="1" opacity="0.5"/>
+        <line x1="15" y1="85" x2="19" y2="81" stroke="#a855f7" stroke-width="1" opacity="0.5"/>
+        <line x1="85" y1="85" x2="81" y2="81" stroke="#a855f7" stroke-width="1" opacity="0.5"/>
+        <!-- Center glow dot -->
+        <circle cx="50" cy="50" r="3.5" fill="#a855f7" opacity="0.8"/>
+        <circle cx="50" cy="50" r="6" fill="none" stroke="#a855f7" stroke-width="0.5" opacity="0.3"/>
+      </svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#interstellar">Interstellar</a></li>
+      <li><a href="#links">Links</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="#hero" class="mobile-link">Home</a>
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#skills" class="mobile-link">Skills</a>
+    <a href="#interstellar" class="mobile-link">Interstellar</a>
+    <a href="#links" class="mobile-link">Links</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="lens-ring" id="parallax-lens"></div>
+    <div class="wormhole" id="parallax-wormhole"></div>
+
+    <div class="hero-content" id="parallax-content">
+      <h1 class="hero-name">Yousef Mustafa</h1>
+      <p class="hero-arabic">يوسف مصطفى</p>
+      <p class="hero-subtitle">Student · UAE 🇦🇪 · Explorer of universes real and cinematic</p>
+    </div>
+
+    <div class="scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="reveal">
+      <p class="section-label">About</p>
+      <h2 class="section-title">A mind drawn to<br>the infinite.</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="reveal space-visual" aria-hidden="true">
+        <div class="orbit-ring orbit-ring-1"><div class="orbit-dot orbit-dot-1"></div></div>
+        <div class="orbit-ring orbit-ring-2"><div class="orbit-dot orbit-dot-2"></div></div>
+        <div class="orbit-ring orbit-ring-3"><div class="orbit-dot orbit-dot-3"></div></div>
+        <div class="orbit-core"></div>
+      </div>
+
+      <div class="about-text reveal">
+        <p>Born and raised in Saudi Arabia 🇸🇦, where I spent 9 years of my education before moving to the UAE 🇦🇪. Now in my first year of high school, navigating a new chapter.</p>
+        <p>Interstellar is not just a film — it's a philosophy. A reminder that love transcends dimensions, and curiosity is the engine that drives us beyond the event horizon.</p>
+        <p>Obsessed with space, time, and the unknown. Building the future, one line of code at a time.</p>
+        <p class="arabic-quote">الكون أكبر من أي شيء نتخيله</p>
+
+        <div class="tags">
+          <span class="tag">Student</span>
+          <span class="tag">Saudi Arabia 🇸🇦</span>
+          <span class="tag">UAE 🇦🇪</span>
+          <span class="tag">Class of '27</span>
+          <span class="tag">Space Enthusiast</span>
+          <span class="tag">Developer</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="reveal">
+      <p class="section-label">Skills & Future</p>
+      <h2 class="section-title">Code, create,<br>and aspire.</h2>
+    </div>
+
+    <div class="skills-grid">
+      <!-- Programming Languages -->
+      <div class="skills-list reveal">
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">
+              <svg class="lang-icon" viewBox="0 0 24 24" fill="#eab308"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.405-.6-.586-.78-.63-.6-1.47-.9-2.835-.78l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/></svg>
+              JavaScript
+            </span>
+            <span class="skill-pct">65%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill js" style="--target-width: 65%"></div>
+          </div>
+          <p class="skill-note">Currently learning more — building projects daily</p>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">
+              <svg class="lang-icon" viewBox="0 0 24 24" fill="#3b82f6"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09-.33.22zM21.1 6.11l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01.21.03zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08-.33.23z"/></svg>
+              Python
+            </span>
+            <span class="skill-pct">45%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill py" style="--target-width: 45%"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">
+              <svg class="lang-icon" viewBox="0 0 24 24" fill="#a855f7"><path d="M11.5 15.97l.41 2.44c-.26.14-.68.27-1.24.39-.57.13-1.24.2-2.01.2-2.21-.04-3.87-.7-4.98-1.96C2.56 15.77 2 14.16 2 12.21c.05-2.31.72-4.08 2-5.32C5.32 5.64 6.96 5 8.94 5c.75 0 1.4.07 1.94.19s.94.25 1.2.4l-.58 2.49-1.06-.34c-.4-.1-.86-.15-1.39-.15-1.16-.01-2.12.36-2.87 1.1-.76.73-1.15 1.85-1.18 3.34 0 1.36.37 2.42 1.08 3.2.71.77 1.71 1.17 2.99 1.18l1.33-.12c.43-.08.79-.19 1.1-.32zm1.95-13.97h3.7c1.4 0 2.51.27 3.35.8.85.53 1.27 1.45 1.27 2.75 0 .65-.16 1.21-.47 1.68-.31.48-.78.85-1.41 1.12.78.24 1.34.65 1.71 1.22.36.56.54 1.22.54 1.97 0 .68-.14 1.3-.42 1.85-.27.55-.65.99-1.15 1.31-.49.33-1.07.56-1.72.7-.66.14-1.37.21-2.14.21h-3.26V2zm3.04 5.8h1.17c.7 0 1.2-.11 1.48-.33.29-.22.43-.59.43-1.09 0-.48-.16-.83-.48-1.06s-.82-.35-1.52-.35h-1.08v2.83zm0 2.33v3.28h1.31c.72 0 1.24-.13 1.55-.38.31-.25.47-.66.47-1.22 0-.57-.16-1-.47-1.29-.31-.29-.83-.4-1.55-.39h-1.31z"/></svg>
+              C#
+            </span>
+            <span class="skill-pct">35%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill cs" style="--target-width: 35%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aspiration -->
+      <div class="aspiration-card reveal">
+        <div class="aspiration-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3 class="aspiration-title">Biomedical Engineering</h3>
+        <p class="aspiration-text">My dream is to study Biomedical Engineering — where technology meets medicine to save lives. A field that designs artificial organs, builds prosthetics, develops medical imaging systems, and creates the tools that push the boundaries of human health.</p>
+        <p class="aspiration-text">From MRI machines to neural interfaces, biomedical engineers are the architects of the future of healthcare. That's where I want to be.</p>
+        <div class="aspiration-details">
+          <span class="aspiration-tag">Medical Devices</span>
+          <span class="aspiration-tag">Prosthetics</span>
+          <span class="aspiration-tag">Medical Imaging</span>
+          <span class="aspiration-tag">Biomechanics</span>
+          <span class="aspiration-tag">Neural Engineering</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interstellar Section -->
+  <section id="interstellar">
+    <div class="interstellar-hero reveal">
+      <p class="section-label">Favorite Film</p>
+      <h2 class="section-title">Interstellar</h2>
+      <p class="interstellar-tagline">Mankind was born on Earth. It was never meant to die here.</p>
+    </div>
+
+    <!-- Black Hole Visual -->
+    <div class="blackhole-container reveal">
+      <div class="blackhole">
+        <div class="accretion-glow"></div>
+        <div class="accretion-disk"></div>
+        <div class="accretion-disk accretion-disk-2"></div>
+        <div class="blackhole-core"></div>
+      </div>
+    </div>
+
+    <!-- Quotes Carousel -->
+    <div class="carousel-wrapper reveal" id="quotes-carousel">
+      <div class="carousel-track" id="carousel-track">
+        <div class="quote-card">
+          <p class="quote-text">Love is the one thing we're capable of perceiving that transcends dimensions of time and space.</p>
+          <span class="quote-speaker">Dr. Brand</span>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">We used to look up at the sky and wonder at our place in the stars. Now we just look down and worry about our place in the dirt.</p>
+          <span class="quote-speaker">Cooper</span>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">Do not go gentle into that good night. Rage, rage against the dying of the light.</p>
+          <span class="quote-speaker">Dr. Brand Sr. — Dylan Thomas</span>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">We're still pioneers. We barely begun. Our greatest accomplishments cannot be behind us, because our destiny lies above us.</p>
+          <span class="quote-speaker">Cooper</span>
+        </div>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-arrow" id="carousel-prev" aria-label="Previous quote">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-dots" id="carousel-dots">
+          <button class="carousel-dot active" aria-label="Quote 1"></button>
+          <button class="carousel-dot" aria-label="Quote 2"></button>
+          <button class="carousel-dot" aria-label="Quote 3"></button>
+          <button class="carousel-dot" aria-label="Quote 4"></button>
+        </div>
+        <button class="carousel-arrow" id="carousel-next" aria-label="Next quote">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Featured Quote -->
+    <div class="featured-quote reveal">
+      <p class="featured-quote-text">"Maybe we've spent too long trying to figure all this out with theory. Love is the one thing that transcends time and space."</p>
+      <p class="featured-quote-arabic">الحب هو الشيء الوحيد الذي يتجاوز الزمان والمكان</p>
+      <p class="featured-quote-speaker">Interstellar, 2014 · Christopher Nolan</p>
+    </div>
+  </section>
+
+  <!-- Links Section -->
+  <section id="links">
+    <div class="reveal">
+      <p class="section-label">Connect</p>
+      <h2 class="section-title">Find me across<br>the cosmos.</h2>
+    </div>
+
+    <div class="cards-grid reveal">
+      <!-- X (Twitter) -->
+      <a href="https://x.com/xwo2_" target="_blank" rel="noopener noreferrer" class="card" id="card-x" aria-label="Visit X profile @xwo2_">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </div>
+        <span class="card-name">X</span>
+        <span class="card-handle">@xwo2_</span>
+        <span class="card-action">Visit profile <span class="arrow-icon">→</span></span>
+      </a>
+
+      <!-- Discord -->
+      <div class="card" id="card-discord" tabindex="0" aria-label="Discord handle .wo2">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/>
+          </svg>
+        </div>
+        <span class="card-name">Discord</span>
+        <span class="card-handle">.wo2</span>
+        <button class="copy-btn" id="copy-discord" aria-label="Copy Discord handle" onclick="event.stopPropagation(); copyDiscord();">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
+          Copy handle
+        </button>
+      </div>
+
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@realyyousef" target="_blank" rel="noopener noreferrer" class="card" id="card-youtube" aria-label="Visit YouTube channel realyyousef">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </div>
+        <span class="card-name">YouTube</span>
+        <span class="card-handle">@realyyousef</span>
+        <span class="card-action">Visit channel <span class="arrow-icon">→</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-line" aria-hidden="true"></div>
+    <p>Made with curiosity & code · 2025</p>
+    <p class="footer-arabic">يوسف مصطفى</p>
+    <p class="footer-quote">"Do not go gentle into that good night."</p>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="alert" aria-live="polite">Copied! ✓</div>
+
+  <!-- Music Player -->
+  <div class="music-player" id="music-player">
+    <span class="music-label">Interstellar OST</span>
+    <button class="music-btn" id="music-btn" aria-label="Toggle background music">
+      <div class="sound-waves"></div>
+      <!-- Play icon (default) -->
+      <svg id="music-icon-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M9 4.5v15l12-7.5L9 4.5z"/>
+      </svg>
+      <!-- Pause icon (hidden) -->
+      <svg id="music-icon-pause" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:none;">
+        <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- YouTube iframe (hidden, for audio) -->
+  <iframe
+    id="yt-player"
+    class="yt-iframe"
+    src="https://www.youtube.com/embed/7GlsxNI4LVI?enablejsapi=1&autoplay=0&loop=1&playlist=7GlsxNI4LVI"
+    allow="autoplay"
+    frameborder="0"
+    tabindex="-1"
+    aria-hidden="true"
+  ></iframe>
+
+  <script>
+    /* ======================================
+       STARFIELD
+    ====================================== */
+    (function() {
+      const canvas = document.getElementById('starfield');
+      const ctx = canvas.getContext('2d');
+      let stars = [];
+      let w, h;
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        initStars();
+      }
+
+      function initStars() {
+        const count = Math.floor(w * h * 0.00015);
+        stars = [];
+        for (let i = 0; i < count; i++) {
+          stars.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 1.2 + 0.3,
+            alpha: Math.random() * 0.7 + 0.3,
+            speed: Math.random() * 0.12 + 0.02,
+            drift: (Math.random() - 0.5) * 0.06,
+            twinkleSpeed: Math.random() * 0.008 + 0.002,
+            twinkleOffset: Math.random() * Math.PI * 2,
+          });
+        }
+      }
+
+      let time = 0;
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        time += 1;
+        for (const star of stars) {
+          star.y += star.speed;
+          star.x += star.drift;
+          if (star.y > h + 5) { star.y = -5; star.x = Math.random() * w; }
+          if (star.x > w + 5) star.x = -5;
+          if (star.x < -5) star.x = w + 5;
+
+          const twinkle = Math.sin(time * star.twinkleSpeed + star.twinkleOffset) * 0.3 + 0.7;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(196, 181, 253, ${star.alpha * twinkle})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      draw();
+    })();
+
+    /* ======================================
+       NAVBAR SCROLL
+    ====================================== */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 30);
+    }, { passive: true });
+
+    /* ======================================
+       HAMBURGER MENU
+    ====================================== */
+    const hamburger = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = mobileMenu.querySelectorAll('.mobile-link');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      mobileMenu.setAttribute('aria-hidden', !isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ======================================
+       PARALLAX ON HERO
+    ====================================== */
+    const parallaxContent = document.getElementById('parallax-content');
+    const parallaxWormhole = document.getElementById('parallax-wormhole');
+    const parallaxLens = document.getElementById('parallax-lens');
+    const heroSection = document.getElementById('hero');
+
+    let mouseX = 0, mouseY = 0, currentX = 0, currentY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    function animateParallax() {
+      currentX += (mouseX - currentX) * 0.05;
+      currentY += (mouseY - currentY) * 0.05;
+      if (parallaxContent) parallaxContent.style.transform = `translate(${currentX * 8}px, ${currentY * 5}px)`;
+      if (parallaxWormhole) parallaxWormhole.style.transform = `translate(${currentX * -15}px, ${currentY * -12}px)`;
+      if (parallaxLens) parallaxLens.style.transform = `translate(${currentX * -8}px, ${currentY * -6}px)`;
+      requestAnimationFrame(animateParallax);
+    }
+    animateParallax();
+
+    /* ======================================
+       SCROLL REVEAL
+    ====================================== */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ======================================
+       SKILLS PROGRESS BAR ANIMATION
+    ====================================== */
+    const skillFills = document.querySelectorAll('.skill-fill');
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+          skillObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    skillFills.forEach(fill => skillObserver.observe(fill));
+
+    /* ======================================
+       COPY DISCORD
+    ====================================== */
+    function copyDiscord() {
+      navigator.clipboard.writeText('.wo2').then(() => {
+        showToast();
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = '.wo2';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast();
+      });
+    }
+
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    /* ======================================
+       SCROLL INDICATOR FADE
+    ====================================== */
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    window.addEventListener('scroll', () => {
+      if (scrollIndicator) {
+        scrollIndicator.style.opacity = Math.max(0, 1 - window.scrollY / 300) * 0.4;
+      }
+    }, { passive: true });
+
+    /* ======================================
+       QUOTES CAROUSEL (Transform-based)
+    ====================================== */
+    (function() {
+      const track = document.getElementById('carousel-track');
+      const dots = document.querySelectorAll('.carousel-dot');
+      const prevBtn = document.getElementById('carousel-prev');
+      const nextBtn = document.getElementById('carousel-next');
+      if (!track) return;
+
+      const cards = track.querySelectorAll('.quote-card');
+      const total = cards.length;
+      let current = 0;
+
+      function goTo(index) {
+        if (index < 0) index = total - 1;
+        if (index >= total) index = 0;
+        current = index;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      prevBtn.addEventListener('click', () => goTo(current - 1));
+      nextBtn.addEventListener('click', () => goTo(current + 1));
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => goTo(i));
+      });
+
+      // Touch swipe
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchDeltaX = 0;
+      let isSwiping = false;
+
+      track.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchDeltaX = 0;
+        isSwiping = false;
+        track.classList.add('no-transition');
+      }, { passive: true });
+
+      track.addEventListener('touchmove', (e) => {
+        const dx = e.touches[0].clientX - touchStartX;
+        const dy = e.touches[0].clientY - touchStartY;
+
+        // Only swipe if horizontal movement > vertical
+        if (!isSwiping && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 5) {
+          isSwiping = true;
+        }
+
+        if (isSwiping) {
+          e.preventDefault();
+          touchDeltaX = dx;
+          const pct = -current * 100 + (dx / track.offsetWidth) * 100;
+          track.style.transform = `translateX(${pct}%)`;
+        }
+      }, { passive: false });
+
+      track.addEventListener('touchend', () => {
+        track.classList.remove('no-transition');
+        if (Math.abs(touchDeltaX) > 50) {
+          goTo(touchDeltaX < 0 ? current + 1 : current - 1);
+        } else {
+          goTo(current);
+        }
+      });
+
+      // Keyboard
+      document.addEventListener('keydown', (e) => {
+        const carousel = document.getElementById('quotes-carousel');
+        const rect = carousel.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight && rect.bottom > 0;
+        if (!inView) return;
+        if (e.key === 'ArrowRight') goTo(current + 1);
+        if (e.key === 'ArrowLeft') goTo(current - 1);
+      });
+    })();
+
+    /* ======================================
+       YOUTUBE MUSIC PLAYER (IFrame API)
+    ====================================== */
+    let ytPlayer = null;
+    let isPlaying = false;
+
+    // Load YouTube IFrame API
+    const ytScript = document.createElement('script');
+    ytScript.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(ytScript);
+
+    window.onYouTubeIframeAPIReady = function() {
+      ytPlayer = new YT.Player('yt-player', {
+        events: {
+          onReady: function() {
+            ytPlayer.setVolume(40);
+          },
+          onStateChange: function(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+              ytPlayer.playVideo(); // loop
+            }
+          }
+        }
+      });
+    };
+
+    const musicBtn = document.getElementById('music-btn');
+    const playIcon = document.getElementById('music-icon-play');
+    const pauseIcon = document.getElementById('music-icon-pause');
+
+    musicBtn.addEventListener('click', () => {
+      if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') return;
+
+      if (isPlaying) {
+        ytPlayer.pauseVideo();
+        musicBtn.classList.remove('playing');
+        playIcon.style.display = '';
+        pauseIcon.style.display = 'none';
+      } else {
+        ytPlayer.playVideo();
+        musicBtn.classList.add('playing');
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = '';
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
+
+</body>
+</html>
